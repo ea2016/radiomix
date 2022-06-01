@@ -1,46 +1,56 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head>
-        <title>Agregar Examen</title>
-        <meta charset="UTF-8"/>
-    </head>
-    <body>
-        <section th:fragment="agregarExamen">
-            <div id="agregarExamen" class="modal fade">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header bg-info text-white">
-                            <h5 class="modal-title" th:text="#{accion.agregarExamen}">Agregar Examen</h5>
-                            <button class="close" data-dismiss="modal">
-                                <span>&times;</span>
-                            </button>
-                        </div> 
-                        <form th:action="@{/guardarExamen}" th:object="${examen}"
-                              method="POST" class="was-validated">
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="nombre" th:text="#{examen.nombre}">Nombre</label>
-                                    <input type="text" class="form-control" name="nombre" required="true">
-                                </div>
-                                <div class="form-group">
-                                    <label for="rif" th:text="#{examen.aliado}">Aliado</label>
-                                    <input type="text" class="form-control" name="aliado" required="true">
-                                </div>
-                                <div class="form-group">
-                                    <label for="direccion" th:text="#{examen.descuento}">descuento</label>
-                                    <input type="text" class="form-control" name="descuento" required="true">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit" th:text="#{accion.guardar}">Guardar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title>Agregar Examen</title>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<section th:fragment="agregarExamen">
+		<div id="agregarExamen" class="modal fade">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header bg-info text-white">
+						<h5 class="modal-title" th:text="#{accion.agregarExamenes}">Agregar
+							Examen</h5>
+						<button class="close" data-dismiss="modal">
+							<span>&times;</span>
+						</button>
+					</div>
+					<form th:action="@{/guardarExamen}" th:object="${examen}"
+						method="POST" class="was-validated">
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="nombre" th:text="#{examen.nombre}">Nombre</label> <input
+									type="text" class="form-control" name="nombre" required="true">
+							</div>
+							<div class="form-group">
+								<label for="idAliado" th:text="#{examen.aliado}">Aliado</label> 
+								<select
+									class="form-control" name="idAliado" id="idAliado">
+									<option></option>
+									<option th:each="aliadosComerciales : ${aliadosComerciales}"
+										th:value="${aliadosComerciales.idAliado}"
+										th:text="${aliadosComerciales.nombre}"></option>
+								</select>
+							</div>
 
-    </body>
+							<div class="form-group">
+								<label for="direccion" th:text="#{examen.descuento}">descuento</label>
+								<input type="text" class="form-control" name="descuento"
+									required="true">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-primary" type="submit"
+								th:text="#{accion.guardar}">Guardar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
 </html>

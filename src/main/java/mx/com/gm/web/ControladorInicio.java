@@ -114,6 +114,8 @@ public class ControladorInicio {
     public String inicioExamen(Model model, @AuthenticationPrincipal User user){
         var examen = examenService.listarExamen();
         model.addAttribute("examenComercial", examen);
+        var aliado = aliadoService.listarAliados();
+        model.addAttribute("aliadosComerciales", aliado);
         model.addAttribute("totalExamen", examen.size());
         return "indexExamen";
     }
@@ -123,7 +125,9 @@ public class ControladorInicio {
     }
     
     @PostMapping("/guardarExamen")
-    public String guardarExamen(@Valid Examen examen, Errors errores){
+    public String guardarExamen(Model model,@Valid Examen examen, Errors errores){
+    	var aliado = aliadoService.listarAliados();
+        model.addAttribute("aliadosComerciales", aliado);
         if(errores.hasErrors()){
             return "modificarExamen";
         }

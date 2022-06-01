@@ -1,48 +1,52 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head>
-        <title>Editar Examen</title>
-        <meta charset="UTF-8"/>
-    </head>
-    <body>
-        <section th:fragment="editarExamen">
-            <form th:action="@{/guardarExamen}" th:object="${examen}"
-                  method="POST" class="was-validated">
-                <input type="hidden" name="idExamen" th:field="*{idExamen}"/>
-                <section th:replace="layout/botonesEditarExamen :: botonesEditar"></section>
-                <div id="details">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4>[[#{accion.editar}]]</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="nombre">[[#{examen.nombre}]]</label>
-                                            <input type="text" class="form-control" name="nombre" 
-                                                   required="true" th:field="*{nombre}"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="idAliado">[[#{examen.aliado}]]</label>
-                                            <input type="text" class="form-control" name="idAliado" 
-                                                   required="true" th:field="*{idAliado}"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="descuento">[[#{examen.descuento}]]</label>
-                                            <input type="text" class="form-control" name="descuento" 
-                                                   required="true" th:field="*{descuento}"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </section>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title>Editar Examen</title>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<section th:fragment="editarExamen">
+		<form th:action="@{/guardarExamen}" th:object="${examen}"
+			method="POST" class="was-validated">
+			<input type="hidden" name="idExamen" th:field="*{idExamen}" />
+			<section th:replace="layout/botonesEditarExamen :: botonesEditar"></section>
+			<div id="details">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="card">
+								<div class="card-header">
+									<h4>[[#{accion.editar}]]</h4>
+								</div>
+								<div class="card-body">
+									<div class="form-group">
+										<label for="nombre">[[#{examen.nombre}]]</label> <input
+											type="text" class="form-control" name="nombre"
+											required="true" th:field="*{nombre}" />
+									</div>
+									<div class="form-group">
+										<label for="idAliado">[[#{examen.aliado}]]</label> 
+										<select class="form-control" id="aliado" name="aliado">
+											<option value=""></option>
+											<option th:each="aliadosComerciales : ${aliadosComerciales}"
+												th:value="${aliadosComerciales.idAliado}"
+												th:text="${aliadosComerciales.nombre}"></option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="descuento">[[#{examen.descuento}]]</label> <input
+											type="text" class="form-control" name="descuento"
+											required="true" th:field="*{descuento}" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+</body>
 </html>
