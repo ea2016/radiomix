@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Listado Aliados</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <section th:fragment="listadoAliados" id="aliado">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{aliado.titulo-lista}]]</h4>
+                            </div>
+                            <div th:if="${aliadoComercial != null and !aliadoComercial.empty}">
+                                <table class="table table-stryped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th th:text="#{aliado.nombre}">Aliado</th>
+                                            <th th:text="#{aliado.rif}">Rif</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="aliadoComercial,  contador : ${aliadoComercial}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${aliadoComercial.nombre}]]</td>
+                                            <td>[[${aliadoComercial.rif}]]</td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editarAliado/} + ${aliadoComercial.idAliado}"
+                                                   class="btn btn-secondary">
+                                                    <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminarAliado(idAliado=${aliadoComercial.idAliado})}"
+                                                   class="btn btn-dark">
+                                                    <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${aliadoComercial == null or aliadoComercial.empty}">
+                                <span th:text="#{aliado.lista}">Lista Aliados vacía</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <div class="card text-center bg-success text-white mb-3">
+                            <div class="card-body">
+                                <h3 th:text="#{aliado.totalAliados}">Total Aliados</h3>
+                                <h4 class="display-4">
+                                    <i class="fas fa-users"></i> [[${totalAliados}]]
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
