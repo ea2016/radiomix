@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title>Nuevo estudio</title>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<section th:fragment="agregarFormulario">
+		<form th:action="@{/guardar}" th:object="${persona}" method="POST"
+			class="was-validated">
+			<input type="hidden" name="idPersona" th:field="*{idPersona}" /> 
+			<input type="hidden" name="nombre" th:field="*{nombre}" /> 
+			<input type="hidden" name="apellido" th:field="*{apellido}" />
+			<input type="hidden" name="email" th:field="*{email}" /> 
+			<input type="hidden" name="telefono" th:field="*{telefono}"/>
+
+			<section th:replace="layout/botonesEditar :: botonesEditar"></section>
+			<div id="details">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="card">
+								<div class="card-header">
+									<h4>[[#{accion.estudio}]]</h4>
+								</div>
+								<div class="card-body">
+									<div class="form-group">
+										<label for="cedula">[[#{persona.cedula}]]</label> 
+										<input type="text" class="form-control" name="cedula"
+											required="true" th:field="*{cedula}" disabled/>
+									</div>
+									<div class="form-group">
+										<label for="idAliado" th:text="#{examen.aliado}">Aliado</label>
+										<select class="form-control" name="idAliado" id="idAliado">
+											<option value="privado">privado</option>
+											<option th:each="aliadosComerciales : ${aliadosComerciales}"
+												th:value="${aliadosComerciales.idAliado}"
+												th:text="${aliadosComerciales.nombre}"></option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="tipoPago" th:text="#{pago.titulo-lista}">Pagos</label>
+										<select class="form-control" name="tipoPago" id="tipoPago">
+											<option value="efectivo">efectivo</option>
+											<option value="tarjeta">tarjeta</option>
+											<option value="pago">pago móvil</option>											
+										</select>
+									</div>   
+									
+									<div class="form-group">
+										<label for="tipoEnvio" th:text="#{envios.titulo-lista}">Envios</label>
+										<select class="form-control" name="tipoEnvio" id="tipoEnvio">
+											<option value="cd">cd</option>
+											<option value="correo">correo</option>											
+											<option value="impreso">impreso</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="idExamen" th:text="#{examen.titulo-lista}">Estudios</label>
+										<select class="form-control" name="idExamen" id="idExamen">
+											<option th:each="estudiosCargados : ${estudiosCargados}"
+												th:value="${estudiosCargados.idExamen}"
+												th:text="${estudiosCargados.nombre}"></option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="idExamen" th:text="#{calendario.nombre}">Fecha</label>
+										<input required="true" type="date" id="fechaEstudio"
+											name="fechaEstudio" class="form-control">
+									</div>
+									<div class="form-group">
+										<label for="idExamen" th:text="#{examen.aliado}">Aliado</label>
+										<input required="true" type="text" id="fechaEstudio"
+											name="fechaEstudio" class="form-control">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+</body>
+</html>

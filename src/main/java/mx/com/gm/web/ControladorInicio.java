@@ -57,6 +57,9 @@ public class ControladorInicio {
         if(errores.hasErrors()){
             return "modificar";
         }
+        if (null==persona.getSaldo()) {
+			persona.setSaldo(0.0);
+		}
         personaService.guardar(persona);
         return "redirect:/";
     }
@@ -66,6 +69,17 @@ public class ControladorInicio {
         persona = personaService.encontrarPersona(persona);
         model.addAttribute("persona", persona);
         return "modificar";
+    }
+    
+    @GetMapping("/agregarFormulario/{idPersona}")
+    public String agregarFormulario(Persona persona, Model model){
+        persona = personaService.encontrarPersona(persona);
+        var aliado = aliadoService.listarAliados();
+        var estudios = examenService.listarExamen();
+        model.addAttribute("aliadosComerciales", aliado);
+        model.addAttribute("estudiosCargados", estudios);
+        model.addAttribute("persona", persona);        
+        return "modificarFormulario";
     }
     
     @GetMapping("/eliminar")

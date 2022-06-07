@@ -29,7 +29,7 @@
 								<label for="idAliado" th:text="#{examen.aliado}">Aliado</label> 
 								<select
 									class="form-control" name="idAliado" id="idAliado">
-									<option></option>
+									<option value="privado">privado</option>
 									<option th:each="aliadosComerciales : ${aliadosComerciales}"
 										th:value="${aliadosComerciales.idAliado}"
 										th:text="${aliadosComerciales.nombre}"></option>
