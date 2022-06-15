@@ -6,15 +6,21 @@
 <title>Nuevo estudio</title>
 <meta charset="UTF-8" />
 </head>
+<script type="text/javascript">
+	var fecha = new Date();
+	document.getElementById("fechaEstudio").value = fecha.toJSON().slice(0,10);
+</script>
 <body>
 	<section th:fragment="agregarFormulario">
-		<form th:action="@{/guardar}" th:object="${persona}" method="POST"
+		<form th:action="@{/guardarFormulario}" th:object="${persona}" method="POST"
 			class="was-validated">
 			<input type="hidden" name="idPersona" th:field="*{idPersona}" /> 
 			<input type="hidden" name="nombre" th:field="*{nombre}" /> 
 			<input type="hidden" name="apellido" th:field="*{apellido}" />
 			<input type="hidden" name="email" th:field="*{email}" /> 
 			<input type="hidden" name="telefono" th:field="*{telefono}"/>
+			<input type="hidden" name="estatus" value="1"/>
+			<input type="hidden" name="cedula" th:field="*{cedula}"/>
 
 			<section th:replace="layout/botonesEditar :: botonesEditar"></section>
 			<div id="details">
@@ -29,12 +35,11 @@
 									<div class="form-group">
 										<label for="cedula">[[#{persona.cedula}]]</label> 
 										<input type="text" class="form-control" name="cedula"
-											required="true" th:field="*{cedula}" disabled/>
+											required="true" th:field="*{cedula}" disabled />
 									</div>
 									<div class="form-group">
 										<label for="idAliado" th:text="#{examen.aliado}">Aliado</label>
 										<select class="form-control" name="idAliado" id="idAliado">
-											<option value="privado">privado</option>
 											<option th:each="aliadosComerciales : ${aliadosComerciales}"
 												th:value="${aliadosComerciales.idAliado}"
 												th:text="${aliadosComerciales.nombre}"></option>
@@ -53,9 +58,9 @@
 									<div class="form-group">
 										<label for="tipoEnvio" th:text="#{envios.titulo-lista}">Envios</label>
 										<select class="form-control" name="tipoEnvio" id="tipoEnvio">
-											<option value="cd">cd</option>
 											<option value="correo">correo</option>											
 											<option value="impreso">impreso</option>
+											<option value="cd">cd</option>
 										</select>
 									</div>
 									<div class="form-group">
@@ -67,14 +72,9 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="idExamen" th:text="#{calendario.nombre}">Fecha</label>
-										<input required="true" type="date" id="fechaEstudio"
-											name="fechaEstudio" class="form-control">
-									</div>
-									<div class="form-group">
-										<label for="idExamen" th:text="#{examen.aliado}">Aliado</label>
-										<input required="true" type="text" id="fechaEstudio"
-											name="fechaEstudio" class="form-control">
+										<label for="fecha" th:text="#{calendario.nombre}">Fecha</label>
+										<input required="true" type="date" id="fecha"
+											name="fecha" class="form-control" pattern="\d{4}-\d{2}-\d{2}">
 									</div>
 								</div>
 							</div>

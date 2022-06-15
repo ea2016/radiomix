@@ -6,9 +6,11 @@ import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import mx.com.gm.domain.Aliado;
 import mx.com.gm.domain.Examen;
+import mx.com.gm.domain.Formulario;
 import mx.com.gm.domain.Persona;
 import mx.com.gm.servicio.AliadoService;
 import mx.com.gm.servicio.ExamenService;
+import mx.com.gm.servicio.FormularioService;
 import mx.com.gm.servicio.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,6 +33,9 @@ public class ControladorInicio {
 	
 	@Autowired
     private ExamenService examenService;
+	
+	@Autowired
+    private FormularioService formularioService;
     
     @GetMapping("/")
     public String inicio(Model model, @AuthenticationPrincipal User user){
@@ -162,5 +167,12 @@ public class ControladorInicio {
     public String eliminarExamen(Examen examen){
     	examenService.eliminar(examen);
         return "redirect:/indexExamen";
+    }
+    /****************************FORMULARIO*************************/
+    
+    @PostMapping("/guardarFormulario")
+    public String guardarFormulario(@Valid Formulario formulario, Errors errores){    
+        formularioService.guardar(formulario);
+        return "/layout/respuestaFormulario";
     }
 }
