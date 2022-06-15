@@ -1,5 +1,7 @@
 package mx.com.gm.web;
 
+import java.util.List;
+
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import mx.com.gm.domain.Aliado;
@@ -32,12 +34,12 @@ public class ControladorInicio {
     
     @GetMapping("/")
     public String inicio(Model model, @AuthenticationPrincipal User user){
-        var personas = personaService.listarPersonas();
+        List<Persona> personas = personaService.listarPersonas();
         log.info("ejecutando el controlador Spring MVC");
         log.info("usuario que hizo login:" + user);
         model.addAttribute("personas", personas);
-        var saldoTotal = 0D;
-        for(var p: personas){
+        double saldoTotal = 0D;
+		for(Persona p: personas){
             saldoTotal += p.getSaldo();
         }
         model.addAttribute("saldoTotal", saldoTotal);
@@ -74,8 +76,8 @@ public class ControladorInicio {
     @GetMapping("/agregarFormulario/{idPersona}")
     public String agregarFormulario(Persona persona, Model model){
         persona = personaService.encontrarPersona(persona);
-        var aliado = aliadoService.listarAliados();
-        var estudios = examenService.listarExamen();
+         List<Aliado> aliado = aliadoService.listarAliados();
+         List<Examen> estudios = examenService.listarExamen();
         model.addAttribute("aliadosComerciales", aliado);
         model.addAttribute("estudiosCargados", estudios);
         model.addAttribute("persona", persona);        
@@ -91,7 +93,7 @@ public class ControladorInicio {
   //**********************ALIADOS*************************//
     @GetMapping("/indexAliado")
     public String inicioAliado(Model model, @AuthenticationPrincipal User user){
-        var aliado = aliadoService.listarAliados();
+         List<Aliado> aliado = aliadoService.listarAliados();
         model.addAttribute("aliadoComercial", aliado);
         model.addAttribute("totalAliados", aliado.size());
         return "indexAliado";
@@ -126,9 +128,9 @@ public class ControladorInicio {
   //**********************EXAMENES*************************//
     @GetMapping("/indexExamen")
     public String inicioExamen(Model model, @AuthenticationPrincipal User user){
-        var examen = examenService.listarExamen();
+    	List<Examen> examen = examenService.listarExamen();
         model.addAttribute("examenComercial", examen);
-        var aliado = aliadoService.listarAliados();
+        List<Aliado> aliado = aliadoService.listarAliados();
         model.addAttribute("aliadosComerciales", aliado);
         model.addAttribute("totalExamen", examen.size());
         return "indexExamen";
@@ -140,7 +142,7 @@ public class ControladorInicio {
     
     @PostMapping("/guardarExamen")
     public String guardarExamen(Model model,@Valid Examen examen, Errors errores){
-    	var aliado = aliadoService.listarAliados();
+    	 List<Aliado> aliado = aliadoService.listarAliados();
         model.addAttribute("aliadosComerciales", aliado);
         if(errores.hasErrors()){
             return "modificarExamen";

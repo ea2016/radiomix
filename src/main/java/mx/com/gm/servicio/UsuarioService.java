@@ -31,7 +31,7 @@ public class UsuarioService implements UserDetailsService{
             throw new UsernameNotFoundException(username);
         }
         
-        var roles = new ArrayList<GrantedAuthority>();
+        ArrayList<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
         
         for(Rol rol: usuario.getRoles()){
             roles.add(new SimpleGrantedAuthority(rol.getNombre()));
