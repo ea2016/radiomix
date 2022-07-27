@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("userDetailsService")
-@Slf4j
 public class UsuarioService implements UserDetailsService{
 
     @Autowired

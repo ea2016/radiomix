@@ -26,6 +26,8 @@ public class Formulario implements Serializable{
     @NotEmpty
     private String idAliado;
     @NotEmpty
+    private String idTecnico;
+    @NotEmpty
     private String tipoPago;
     @NotEmpty
     private String tipoEnvio;
@@ -36,4 +38,6 @@ public class Formulario implements Serializable{
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
+    
+    
 }
