@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title>Listado Clientes</title>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<section th:fragment="listadoClientesTecnico" id="clientes">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+					<div class="card">
+						<div class="card-header">
+							<h4>[[#{persona.titulo-lista}]]</h4>
+						</div>
+						<div th:if="${personas != null and !personas.empty}">
+							<table class="table table-stryped">
+								<thead class="thead-dark">
+									<tr>
+										<th>#</th>
+										<th th:text="#{persona.cedula}">Cedula</th>
+										<th th:text="#{examen.titulo-lista}">Examen</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="persona, contador : ${personas}">
+										<td>[[${contador.count}]]</td>
+										<td>[[${persona.cedula}]]</td>
+										<td>[[${persona.nombreExamen}]]</td>
+										<td><a
+											th:href="@{/agregarFormulario/} + ${persona.idFormulario}"
+											class="btn btn-warning"> <i
+												class="fas fa-angle-double-right"></i> [[#{accion.estudio}]]
+										</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="text-center p-2"
+							th:if="${personas == null or personas.empty}">
+							<span th:text="#{persona.lista-vacia}">Lista vacía</span>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="col-md-3">
+
+					<div class="card text-center bg-success text-white mb-3">
+						<div class="card-body">
+							<h3 th:text="#{persona.totalClientes}">Total Clientes Pendientes</h3>
+							<h4 class="display-4">
+								<i class="fas fa-users"></i> [[${totalClientes}]]
+							</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

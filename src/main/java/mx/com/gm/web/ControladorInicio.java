@@ -1,5 +1,6 @@
 package mx.com.gm.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -8,13 +9,14 @@ import mx.com.gm.dao.UsuarioDao;
 import mx.com.gm.domain.Aliado;
 import mx.com.gm.domain.Examen;
 import mx.com.gm.domain.Formulario;
+import mx.com.gm.domain.FormularioTecnico;
 import mx.com.gm.domain.Persona;
+import mx.com.gm.domain.Rol;
 import mx.com.gm.domain.Usuario;
 import mx.com.gm.servicio.AliadoService;
 import mx.com.gm.servicio.ExamenService;
 import mx.com.gm.servicio.FormularioService;
 import mx.com.gm.servicio.PersonaService;
-import mx.com.gm.servicio.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,6 +26,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import ch.qos.logback.core.joran.conditional.IfAction;
 
 @Controller
 @Slf4j
@@ -46,6 +50,23 @@ public class ControladorInicio {
 
 	@GetMapping("/")
 	public String inicio(Model model, @AuthenticationPrincipal User user) {
+		Usuario usuario = usuarioDao.findByUsername(user.getUsername());
+		List<Rol> roles = usuario.getRoles();
+		if (roles.get(0).getNombre().equals("ROLE_TEC")) {
+			List<FormularioTecnico> formTec = new ArrayList<FormularioTecnico>();
+			List<Formulario> form = formularioService.listarFormularioTecnico(String.valueOf(usuario.getIdUsuario()));
+			for (Formulario formulario : form) {
+				if (formulario.getEstatus().equals("1")) {
+					Examen exa = examenService.encontrarExamen(formulario.getIdExamen());
+					formTec.add(new FormularioTecnico(formulario.getIdFormulario(), formulario.getCedula(),
+							formulario.getIdTecnico(), exa.getNombre(), formulario.getIdExamen(),
+							formulario.getEstatus()));
+				}
+			}
+			model.addAttribute("personas", formTec);
+			model.addAttribute("totalClientes", form.size());
+			return "indexTecnico";
+		}
 		List<Persona> personas = personaService.listarPersonas();
 		log.info("ejecutando el controlador Spring MVC");
 		log.info("usuario que hizo login:" + user);
@@ -183,7 +204,22 @@ public class ControladorInicio {
 
 	@PostMapping("/guardarFormulario")
 	public String guardarFormulario(@Valid Formulario formulario, Errors errores) {
-		formularioService.guardar(formulario); 
+		formularioService.guardar(formulario);
 		return "/layout/respuestaFormulario";
+	}
+
+	@GetMapping("/indexTecnico")
+	public String inicioTecnico(Model model, @AuthenticationPrincipal User user) {
+		List<Persona> personas = personaService.listarPersonas();
+		log.info("ejecutando el controlador Spring MVC");
+		log.info("usuario que hizo login:" + user);
+		model.addAttribute("personas", personas);
+		double saldoTotal = 0D;
+		for (Persona p : personas) {
+			saldoTotal += p.getSaldo();
+		}
+		model.addAttribute("saldoTotal", saldoTotal);
+		model.addAttribute("totalClientes", personas.size());
+		return "indexTecnico";
 	}
 }

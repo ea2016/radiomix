@@ -13,4 +13,6 @@ public interface ExamenService {
     public void eliminar(Examen examen);
     
     public Examen encontrarExamen(Examen examen);
+
+    public Examen encontrarExamen(String idExamen);
 }

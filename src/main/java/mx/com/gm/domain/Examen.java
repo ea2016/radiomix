@@ -24,5 +24,4 @@ public class Examen implements Serializable{
     
     @NotEmpty
     private String descuento;
-
 }

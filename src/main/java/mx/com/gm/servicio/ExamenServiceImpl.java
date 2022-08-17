@@ -36,4 +36,9 @@ public class ExamenServiceImpl implements ExamenService {
     public Examen encontrarExamen(Examen examen) {
         return examenDao.findById(examen.getIdExamen()).orElse(null);
     }
+    
+    @Override
+    public Examen encontrarExamen(String idExamen) {
+        return examenDao.findById(Long.parseLong(idExamen)).orElse(null);
+    }
 }

@@ -3,6 +3,7 @@ package mx.com.gm.servicio;
 import java.util.List;
 import mx.com.gm.dao.FormularioDao;
 import mx.com.gm.domain.Formulario;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,4 +37,9 @@ public class FormularioServiceImpl implements FormularioService {
     public Formulario encontrarFormulario(Formulario formulario) {
         return formularioDao.findById(formulario.getIdFormulario()).orElse(null);
     }
+
+	@Override
+	public List<Formulario> listarFormularioTecnico(String usuario) {
+		return formularioDao.findByidTecnico(usuario);
+	}
 }
