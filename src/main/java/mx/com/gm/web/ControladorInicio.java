@@ -27,7 +27,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import ch.qos.logback.core.joran.conditional.IfAction;
+//explicacion omar
 
 @Controller
 @Slf4j
