@@ -27,18 +27,9 @@
 											required="true" th:field="*{nombre}" />
 									</div>
 									<div class="form-group">
-										<label for="idAliado">[[#{examen.aliado}]]</label> 
-										<select class="form-control" id="aliado" name="aliado">
-											<option value=""></option>
-											<option th:each="aliadosComerciales : ${aliadosComerciales}"
-												th:value="${aliadosComerciales.idAliado}"
-												th:text="${aliadosComerciales.nombre}"></option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label for="descuento">[[#{examen.descuento}]]</label> <input
-											type="text" class="form-control" name="descuento"
-											required="true" th:field="*{descuento}" />
+										<label for="precio">[[#{examen.precio}]]</label> <input
+											type="text" class="form-control" name="precio"
+											required="true" th:field="*{precio}" />
 									</div>
 								</div>
 							</div>

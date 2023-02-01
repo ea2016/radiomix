@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title>Listado Clientes</title>
+<meta charset="UTF-8" />
+</head>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#example').DataTable();
+	});
+</script>
+<body>
+	<section th:fragment="listadoClientesDoctor" id="clientes">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+					<div class="card">
+						<div class="card-header">
+							<h4>[[#{persona.titulo-lista}]]</h4>
+						</div>
+						<p th:text="${message}" th:if="${message ne null}"
+							class="alert alert-primary"></p>
+						<div th:if="${personas != null and !personas.empty}">
+							<table id="example" class="table table-striped table-bordered"
+								style="width: 100%">
+								<thead class="thead-dark">
+									<tr>
+										<th># ID</th>
+										<th th:text="#{persona.cedula}">Cedula</th>
+										<th th:text="#{examen.titulo-lista}">Examen</th>
+										<th th:text="#{accion.acciones}">Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="persona, contador : ${personas}">
+										<td>[[${persona.idFormulario}]]</td>
+										<td>[[${persona.cedula}]]</td>
+										<td>[[${persona.nombreExamen}]]</td>
+										<td><input type="button" class="btn btn-primary"
+											value='descargar examen'
+											th:onclick="windows.location.href=[[${persona.rutaExamen}]]">
+											<form th:action="@{/guardarInforme}" method="POST"
+												class="was-validated">
+												<textarea name="informe" id="informe"
+													placeholder="Redactar informe"></textarea>
+												<input type="hidden" name="idFormulario"
+													th:value="${persona.idFormulario}"> <input
+													type="hidden" name="total" th:value="${totalClientes}">
+												<input type="submit" value="Guardar">
+											</form>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div class="text-center p-2"
+							th:if="${personas == null or personas.empty}">
+							<span th:text="#{persona.lista-vacia}">Lista vacía</span>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="col-md-3">
+					<div class="card text-center bg-success text-white mb-3">
+						<div class="card-body">
+							<h3 th:text="#{accion.pendiente}">Total Pendientes
+								Pendientes</h3>
+							<h4 class="display-4">
+								<i class="fas fa-users"></i> [[${totalClientes}]]
+							</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
+

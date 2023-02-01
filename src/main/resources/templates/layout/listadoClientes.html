@@ -25,6 +25,7 @@
 										<th></th>
 										<th></th>
 										<th></th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -49,6 +50,12 @@
 												class="fas fa-angle-double-right"></i>
 												[[#{accion.estudio}]]
 										</a></td>
+										<td><a 
+											th:href="@{/generarFactura/} + ${persona.idPersona}"
+											class="btn btn-danger"> <i
+												class="fas fa-angle-double-right"></i>
+												[[#{accion.factura}]]
+										</a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -61,13 +68,13 @@
 				</div>
 
 				<div class="col-md-3">
-					<div class="card text-center bg-danger text-white mb-3">
-						<div class="card-body">
-							<h3 th:text="#{persona.saldoTotal}">Saldo total</h3>
-							<h4 class="display-4">[[${new
-								java.text.DecimalFormat('$#,##0.00').format(saldoTotal)}]]</h4>
-						</div>
-					</div>
+<!-- 					<div class="card text-center bg-danger text-white mb-3"> -->
+<!-- 						<div class="card-body"> -->
+<!-- 							<h3 th:text="#{persona.saldoTotal}">Saldo total</h3> -->
+<!-- 							<h4 class="display-4">[[${new -->
+<!-- 								java.text.DecimalFormat('$#,##0.00').format(saldoTotal)}]]</h4> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 
 					<div class="card text-center bg-success text-white mb-3">
 						<div class="card-body">

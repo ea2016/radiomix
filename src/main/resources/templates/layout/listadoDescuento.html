@@ -3,42 +3,44 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title>Listado Examen</title>
+        <title>Listado Descuento</title>
         <meta charset="UTF-8"/>
     </head>
     <body>
-        <section th:fragment="listadoExamen" id="examen">
+        <section th:fragment="listadoDescuento" id="descuento">
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
                         <div class="card">
                             <div class="card-header">
-                                <h4>[[#{examen.titulo-lista}]]</h4>
+                                <h4>[[#{descuento.titulo-lista}]]</h4>
                             </div>
-                            <div th:if="${examenComercial != null and !examenComercial.empty}">
+                            <div th:if="${descuentoComercial != null and !descuentoComercial.empty}">
                                 <table class="table table-stryped">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>#</th>
-                                            <th th:text="#{examen.nombre}">Nombre</th>
-                                            <th th:text="#{examen.precio}">Precio</th>
+                                            <th th:text="#{descuento.nombre.aliado}">Nombre Aliado</th>
+                                            <th th:text="#{descuento.nombre.examen}">Nombre Examen</th>
+                                            <th th:text="#{descuento.descuento.aplicable}">Se descontará</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="examenComercial,  contador : ${examenComercial}">
+                                        <tr th:each="descuentoComercial,  contador : ${descuentoComercial}">
                                             <td>[[${contador.count}]]</td>
-                                            <td>[[${examenComercial.nombre}]]</td>
-                                            <td>[[${examenComercial.precio}]] $</td>
+                                            <td>[[${descuentoComercial.nombreAliado}]]</td>
+                                            <td>[[${descuentoComercial.nombreExamen}]]</td>
+                                            <td>[[${descuentoComercial.descuento}]] $</td>
                                             <td>
-                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editarExamen/} + ${examenComercial.idExamen}"
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editarDescuento/} + ${descuentoComercial.idDescuento}"
                                                    class="btn btn-secondary">
                                                     <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
                                                 </a>
                                             </td>
                                             <td>
-                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminarExamen(idExamen=${examenComercial.idExamen})}"
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminarDescuento(idDescuento=${descuentoComercial.idDescuento})}"
                                                    class="btn btn-dark">
                                                     <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
                                                 </a>
@@ -47,8 +49,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="text-center p-2" th:if="${examenComercial == null or examenComercial.empty}">
-                                <span th:text="#{examen.lista}">Lista Examen vacía</span>
+                            <div class="text-center p-2" th:if="${descuentoComercial == null or descuentoComercial.empty}">
+                                <span th:text="#{descuento.lista}">Lista Descuento vacía</span>
                             </div>
                         </div>
                     </div>
@@ -57,9 +59,9 @@
 
                         <div class="card text-center bg-success text-white mb-3">
                             <div class="card-body">
-                                <h3 th:text="#{examen.totalExamen}">Total Examen</h3>
+                                <h3 th:text="#{descuento.totalDescuento}">Total Descuento</h3>
                                 <h4 class="display-4">
-                                    <i class="fas fa-users"></i> [[${totalExamen}]]
+                                    <i class="fas fa-users"></i> [[${totalDescuento}]]
                                 </h4>
                             </div>
                         </div>

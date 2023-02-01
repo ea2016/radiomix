@@ -3,30 +3,26 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<title>Agregar Examen</title>
+<title>Agregar Descuento</title>
 <meta charset="UTF-8" />
 </head>
 <body>
-	<section th:fragment="agregarExamen">
-		<div id="agregarExamen" class="modal fade">
+	<section th:fragment="agregarDescuento">
+		<div id="agregarDescuento" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header bg-info text-white">
-						<h5 class="modal-title" th:text="#{accion.agregarExamenes}">Agregar
-							Examen</h5>
+						<h5 class="modal-title" th:text="#{accion.agregarDescuentos}">Agregar
+							Descuento</h5>
 						<button class="close" data-dismiss="modal">
 							<span>&times;</span>
 						</button>
 					</div>
-					<form th:action="@{/guardarExamen}" th:object="${examen}"
+					<form th:action="@{/guardarDescuento}" th:object="${descuento}"
 						method="POST" class="was-validated">
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="nombre" th:text="#{examen.nombre}">Nombre</label> <input
-									type="text" class="form-control" name="nombre" required="true">
-							</div>
-							<div class="form-group">
-								<label for="idAliado" th:text="#{examen.aliado}">Aliado</label> 
+								<label for="idAliado" th:text="#{descuento.aliado}">Aliado</label> 
 								<select
 									class="form-control" name="idAliado" id="idAliado">
 									<option value="0">privado</option>
@@ -35,16 +31,20 @@
 										th:text="${aliadosComerciales.nombre}"></option>
 								</select>
 							</div>
-
-							<div class="form-group">
-								<label for="direccion" th:text="#{examen.descuento}">descuento en %</label>
-								<input type="text" class="form-control" name="descuento"
-									required="true">
-							</div>
 							
 							<div class="form-group">
-								<label for="direccion" th:text="#{examen.precio}">precio en $</label>
-								<input type="text" class="form-control" name="precio"
+								<label for="idAliado" th:text="#{descuento.examenes}">Examen</label> 
+								<select
+									class="form-control" name="idExamen" id="idExamen">
+									<option th:each="examenComercial : ${examenComercial}"
+										th:value="${examenComercial.idExamen}"
+										th:text="${examenComercial.nombre}"></option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label for="direccion" th:text="#{descuento.descuento}">Descuento en %</label>
+								<input type="number" min="1" max="100"class="form-control" name="descuento"
 									required="true">
 							</div>
 						</div>
