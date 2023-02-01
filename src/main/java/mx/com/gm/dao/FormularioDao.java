@@ -11,4 +11,6 @@ public interface FormularioDao extends JpaRepository<Formulario, Long>{
     
 	 List<Formulario> findByidTecnico(String idTecnico);
 
+	 List<Formulario> findByidDoctor(String idDoctor);
+
 }
