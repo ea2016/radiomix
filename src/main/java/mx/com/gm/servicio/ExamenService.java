@@ -6,7 +6,7 @@ import mx.com.gm.domain.Examen;
 
 public interface ExamenService {
     
-    public List<Examen> listarExamen();
+    public List<Examen> listarExamen();    
     
     public void guardar(Examen examen);
     

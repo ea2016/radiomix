@@ -2,7 +2,6 @@ package mx.com.gm.servicio;
 
 import java.util.List;
 import mx.com.gm.domain.Formulario;
-import mx.com.gm.domain.FormularioTecnico;
 
 public interface FormularioService {
     
@@ -14,5 +13,9 @@ public interface FormularioService {
     
     public Formulario encontrarFormulario(Formulario formulario);
     
+    public Formulario encontrarFormulario(Long id);
+    
     public List<Formulario> listarFormularioTecnico(String usuario);
+
+    public List<Formulario> listarFormularioDoctor(String usuario);
 }

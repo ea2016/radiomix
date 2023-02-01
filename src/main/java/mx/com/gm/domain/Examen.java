@@ -20,8 +20,6 @@ public class Examen implements Serializable{
     private String nombre;
     
     @NotEmpty
-    private String idAliado;
-    
-    @NotEmpty
-    private String descuento;
+    private String precio;
+   
 }

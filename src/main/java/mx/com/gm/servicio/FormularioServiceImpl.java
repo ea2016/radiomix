@@ -38,8 +38,18 @@ public class FormularioServiceImpl implements FormularioService {
         return formularioDao.findById(formulario.getIdFormulario()).orElse(null);
     }
 
-	@Override
+    @Override
 	public List<Formulario> listarFormularioTecnico(String usuario) {
 		return formularioDao.findByidTecnico(usuario);
+	}
+    
+    @Override
+	public List<Formulario> listarFormularioDoctor(String usuario) {
+		return formularioDao.findByidDoctor(usuario);
+	}
+
+	@Override
+	public Formulario encontrarFormulario(Long id) {
+		return formularioDao.findById(id).orElse(null);
 	}
 }

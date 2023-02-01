@@ -4,6 +4,7 @@ import java.util.List;
 import mx.com.gm.dao.PersonaDao;
 import mx.com.gm.domain.Persona;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,9 +15,8 @@ public class PersonaServiceImpl implements PersonaService {
     private PersonaDao personaDao;
     
     @Override
-    @Transactional(readOnly = true)
-    public List<Persona> listarPersonas() {
-        return (List<Persona>) personaDao.findAll();
+    public List<Persona> listarPersonas(Sort sort) {
+        return (List<Persona>) personaDao.findAll(sort);
     }
 
     @Override
@@ -36,4 +36,9 @@ public class PersonaServiceImpl implements PersonaService {
     public Persona encontrarPersona(Persona persona) {
         return personaDao.findById(persona.getIdPersona()).orElse(null);
     }
+
+	@Override
+	public List<Persona> listarPersonas() {
+		 return (List<Persona>) personaDao.findAll();
+	}
 }

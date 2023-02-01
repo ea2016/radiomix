@@ -2,35 +2,29 @@ package mx.com.gm.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "persona")
-public class Persona implements Serializable{
+@Table(name = "descuento")
+public class Descuento implements Serializable{
     
     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPersona;
+    private Long idDescuento;
     
     @NotEmpty
-    private String nombre;
+    private String idExamen;
+    private String nombreExamen;
     
     @NotEmpty
-    private String apellido;
-    
-    private int cedula;
+    private String idAliado;
+    private String nombreAliado;
     
     @NotEmpty
-    @Email
-    private String email;
-    
-    private String telefono;
-    
-    private Double saldo;
+    private String descuento;
+   
 }

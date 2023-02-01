@@ -36,8 +36,16 @@ public class Formulario implements Serializable{
     @NotEmpty
     private String estatus;
     
+    private String rutaExamen;
+    
+    @NotEmpty
+    private String idDoctor;
+    
+    private String informe;
+    
+    private String observaciones;
+    
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
-    
     
 }
