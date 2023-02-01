@@ -15,6 +15,8 @@ public interface FormularioService {
     
     public Formulario encontrarFormulario(Long id);
     
+    public List<Formulario> listarFormularioUsuario(String cedula);
+    
     public List<Formulario> listarFormularioTecnico(String usuario);
 
     public List<Formulario> listarFormularioDoctor(String usuario);

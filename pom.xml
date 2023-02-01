@@ -68,6 +68,18 @@
 			<artifactId>webjars-locator</artifactId>
 			<version>0.38</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.dcm4che/dcm4che-imageio -->
+		<dependency>
+			<groupId>org.dcm4che</groupId>
+			<artifactId>dcm4che-imageio</artifactId>
+			<version>5.27.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

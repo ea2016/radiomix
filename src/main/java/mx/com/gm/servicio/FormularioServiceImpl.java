@@ -21,7 +21,6 @@ public class FormularioServiceImpl implements FormularioService {
     }
 
     @Override
-    @Transactional
     public void guardar(Formulario formulario) {
     	formularioDao.save(formulario);
     }
@@ -38,6 +37,11 @@ public class FormularioServiceImpl implements FormularioService {
         return formularioDao.findById(formulario.getIdFormulario()).orElse(null);
     }
 
+    @Override
+	public List<Formulario> listarFormularioUsuario(String cedula) {
+		return formularioDao.findByCedula(cedula);
+	}
+    
     @Override
 	public List<Formulario> listarFormularioTecnico(String usuario) {
 		return formularioDao.findByidTecnico(usuario);

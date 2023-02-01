@@ -6,6 +6,7 @@ import mx.com.gm.domain.Examen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Sort;
 
 @Service
 public class ExamenServiceImpl implements ExamenService {
@@ -16,7 +17,7 @@ public class ExamenServiceImpl implements ExamenService {
     @Override
     @Transactional(readOnly = true)
     public List<Examen> listarExamen() {
-        return (List<Examen>) examenDao.findAll();
+        return (List<Examen>) examenDao.findAll(Sort.by(Sort.Direction.DESC, "idExamen"));
     }
 
     @Override

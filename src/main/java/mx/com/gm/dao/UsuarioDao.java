@@ -1,6 +1,7 @@
 package mx.com.gm.dao;
 
 import mx.com.gm.domain.Usuario;
+
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -24,7 +24,7 @@ public class Persona implements Serializable{
     @NotEmpty
     private String apellido;
     
-    private int cedula;
+    private String cedula;
     
     @NotEmpty
     @Email

@@ -15,4 +15,6 @@ public interface DescuentoService {
     public Descuento encontrarDescuento(Descuento descuento);
 
     public Descuento encontrarDescuento(String idDescuento);
+
+    public Descuento sacarDescuentoIndividual(String idExamen, String idAliado);
 }

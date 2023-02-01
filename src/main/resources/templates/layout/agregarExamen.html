@@ -26,9 +26,8 @@
 									type="text" class="form-control" name="nombre" required="true">
 							</div>
 							<div class="form-group">
-								<label for="idAliado" th:text="#{examen.aliado}">Aliado</label> 
-								<select
-									class="form-control" name="idAliado" id="idAliado">
+								<label for="idAliado" th:text="#{examen.aliado}">Aliado</label>
+								<select class="form-control" name="idAliado" id="idAliado">
 									<option value="0">privado</option>
 									<option th:each="aliadosComerciales : ${aliadosComerciales}"
 										th:value="${aliadosComerciales.idAliado}"
@@ -37,14 +36,8 @@
 							</div>
 
 							<div class="form-group">
-								<label for="direccion" th:text="#{examen.descuento}">descuento en %</label>
-								<input type="text" class="form-control" name="descuento"
-									required="true">
-							</div>
-							
-							<div class="form-group">
-								<label for="direccion" th:text="#{examen.precio}">precio en $</label>
-								<input type="text" class="form-control" name="precio"
+								<label for="direccion" th:text="#{examen.precio}">precio
+									en $</label> <input type="text" class="form-control" name="precio"
 									required="true">
 							</div>
 						</div>

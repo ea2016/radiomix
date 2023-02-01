@@ -15,6 +15,9 @@
 						<div class="card-header">
 							<h4>[[#{persona.titulo-lista}]]</h4>
 						</div>
+						<div th:if="${mensaje == null}">
+								<div class="alert alert-danger">NO tiene productos disponibles de facturar</div>
+							</div>
 						<div th:if="${personas != null and !personas.empty}">
 							<table class="table table-stryped">
 								<thead class="thead-dark">
@@ -26,9 +29,11 @@
 										<th></th>
 										<th></th>
 										<th></th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
+								
 									<tr th:each="persona, contador : ${personas}">
 										<td>[[${contador.count}]]</td>
 										<td>[[${persona.nombre} + ' ' + ${persona.apellido}]]</td>
@@ -55,6 +60,12 @@
 											class="btn btn-danger"> <i
 												class="fas fa-angle-double-right"></i>
 												[[#{accion.factura}]]
+										</a></td>
+										<td><a 
+											th:href="@{/enviarExamen/7/} + ${persona.idPersona}"
+											class="btn btn-primary"> <i
+												class="fas fa-angle-double-right"></i>
+												[[#{accion.enviar}]]
 										</a></td>
 									</tr>
 								</tbody>

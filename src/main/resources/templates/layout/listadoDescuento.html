@@ -34,12 +34,6 @@
                                             <td>[[${descuentoComercial.nombreExamen}]]</td>
                                             <td>[[${descuentoComercial.descuento}]] $</td>
                                             <td>
-                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editarDescuento/} + ${descuentoComercial.idDescuento}"
-                                                   class="btn btn-secondary">
-                                                    <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
-                                                </a>
-                                            </td>
-                                            <td>
                                                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminarDescuento(idDescuento=${descuentoComercial.idDescuento})}"
                                                    class="btn btn-dark">
                                                     <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]

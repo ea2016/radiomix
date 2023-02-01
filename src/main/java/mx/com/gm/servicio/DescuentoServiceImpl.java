@@ -41,4 +41,9 @@ public class DescuentoServiceImpl implements DescuentoService{
     public Descuento encontrarDescuento(String idDescuento) {
         return descuentoDao.findById(Long.parseLong(idDescuento)).orElse(null);
     }
+
+	@Override
+	public Descuento sacarDescuentoIndividual(String idExamen, String idAliado) {
+		return descuentoDao.findByIdExamenAndIdAliado(idExamen,idAliado);
+	}
 }

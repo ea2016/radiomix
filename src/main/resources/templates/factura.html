@@ -9,140 +9,108 @@
 
 	<header th:replace="layout/plantilla :: header"></header>
 
-<div class="main">
-    <div class="container mt-3">
-        <div class="card animate__animated animate__fadeIn">
-            <div class="card-header">
-                <strong>Fecha:</strong>
-                01/01/2018
-                <span class="float-right"> 
-                <strong>Fecha de Vcto:</strong>
-                01/01/2018
-                </span>
+	<div class="main">
+		<div class="container mt-3">
+			<div class="card animate__animated animate__fadeIn">
+				<div class="card-header">
 
-            </div>
-            <div class="card-body">
-                <div class="row mb-4">
-                    <div class="col-6 col-md-6">
-                        <h6 class="mb-2">De: CONTUSALUD 2016 C.A</h6>
-                        <div>
-                            <strong>Domicilio Fiscal</strong>
-                        </div>
-                        <div>Av Pascuale Giorgio, Edf Lanex</div>
-                        <div>Centro Plaza, Torre D piso 8</div>
-                        <div>Los palos grandes, Chacao Edo. Miranda</div>
-                        <div><strong>Email:</strong> cobranzas.contusalud@gmail.com</div>
-                        <div><strong>Teléfono:</strong> (0212) 237 4874 / (414) 269 4130</div>
-                    </div>
+					<strong>Fecha:</strong> [[${#dates.format(#dates.createNow(), 'dd
+					MMM yyyy')}]] <span class="float-right"> 
+					<strong>Fecha de Vcto:</strong> [[${#dates.format(#dates.createNow(), 'dd MMM yyyy')}]]
+					</span>
 
-                    <div class="col-6 col-md-6">
-                        <h6 class="mb-2">Para:</h6>
-                        <div>
-                            <strong>Enrique Suaerz</strong>
-                        </div>
-                        <div>Email: marek@suarez.com</div>
-                        <div>Phone: +54 123 456 789</div>
-                    </div>
+				</div>
+				<div class="card-body">
+					<div class="row mb-4">
+						<div class="col-6 col-md-6">
+							<h6 class="mb-2">De:</h6>
+							<div>
+								<strong>CONTUSALUD 2016 C.A</strong>
+							</div>
+							<div>
+								<strong>Domicilio Fiscal:</strong>
+							</div>
+							<div>Av Pascuale Giorgio, Edf Lanex</div>
+							<div>Centro Plaza, Torre D piso 8</div>
+							<div>Los palos grandes, Chacao Edo. Miranda</div>
+							<div>
+								<strong>RIF:</strong> J-408468204
+							</div>
+							<div>
+								<strong>Correo:</strong> cobranzas.contusalud@gmail.com
+							</div>
+							<div>
+								<strong>Teléfono:</strong> (0212) 237 4874 / (414) 269 4130
+							</div>
+						</div>
 
-                </div>
+						<div class="col-6 col-md-6">
+							<h6 class="mb-2">Para:</h6>
+							<div>
+								<strong>[[${persona.nombre}]]</strong> <strong>[[${persona.apellido}]]</strong>
+							</div>
+							<div>
+								<strong>Correo:</strong> [[${persona.email}]]
+							</div>
+							<div>
+								<strong>Teléfono:</strong> [[${persona.telefono}]]
+							</div>
+						</div>
 
-                <div class="table-responsive-sm">
-                    <table class="table table-sm table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col" width="2%" class="center">#</th>
-                                <th scope="col" width="20%">Producto/Servicio</th>
-                                <th scope="col" class="d-none d-sm-table-cell" width="50%">Descripción</th>
+					</div>
+					<div class="table-responsive-sm">
+						<table class="table table-sm table-striped">
+							<thead>
+								<tr>
+									<th scope="col" width="2%" class="center">#</th>
+									<th scope="col" width="25%">Producto/Servicio</th>
+									<th scope="col" width="10%" class="text-center">P. Unidad</th>
+									<th scope="col" width="8%" class="text-center">Num.</th>
+									<th scope="col" width="10%" class="text-right">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="examen,  contador : ${examen}">
+									<td>[[${contador.count}]]</td>
+									<td>[[${examen.nombre}]]</td>
+									<td class="text-center"><th:block th:with="var = ${examen.precio * precioDolar}"><p th:text="${var}"></p></th:block></td>
+									<td class="text-center">1</td>
+									<td class="text-right"><th:block th:with="var = ${examen.precio * precioDolar}"><p th:text="${var}"></p></th:block></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="row">
+						<div class="col-lg-4 col-sm-5"></div>
 
-                                <th scope="col" width="10%" class="text-right">P. Unidad</th>
-                                <th scope="col" width="8%" class="text-right">Num.</th>
-                                <th scope="col" width="10%" class="text-right">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-left">1</td>
-                                <td class="item_name">Origin License</td>
-                                <td class="item_desc d-none d-sm-table-cell">Extended License</td>
+						<div class="col-lg-4 col-sm-5 ml-auto">
+							<table class="table table-sm table-clear">
+								<tbody>
+									<tr>
+										<td class="left"><strong>Subtotal</strong></td>
+<!-- 										<td class="text-right bg-light">[[${subtotal}]]</td> -->
+										<td class="text-right bg-light"><strong>[[${total}]]</strong>
+									</tr>
+									<tr>
+										<td class="left"><strong>IVA %</strong></td>
+<!-- 										<td class="text-right bg-light">[[${iva}]]</td> -->
+									</tr>
+									<tr>
+										<td class="left"><strong>Total</strong></td>
+										<td class="text-right bg-light"><strong>[[${total}]]</strong>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 
-                                <td class="text-right">999,00€</td>
-                                <td class="text-right">1</td>
-                                <td class="text-right">999,00€</td>
-                            </tr>
-                            <tr>
-                                <td class="center">2</td>
-                                <td class="item_name">Custom Services</td>
-                                <td class="item_desc d-none d-sm-table-cell">Instalation and Customization (cost per hour)</td>
+						</div>
 
-                                <td class="text-right">150,00€</td>
-                                <td class="text-right">20</td>
-                                <td class="text-right">3.000,00€</td>
-                            </tr>
-                            <tr>
-                                <td class="center">3</td>
-                                <td class="item_name">Hosting</td>
-                                <td class="item_desc d-none d-sm-table-cell">1 year subcription</td>
+					</div>
 
-                                <td class="text-right">499,00€</td>
-                                <td class="text-right">1</td>
-                                <td class="text-right">499,00€</td>
-                            </tr>
-                            <tr>
-                                <td class="center">4</td>
-                                <td class="item_name">Platinum Support</td>
-                                <td class="item_desc d-none d-sm-table-cell">1 year subcription 24/7</td>
-
-                                <td class="text-right">3.999,00€</td>
-                                <td class="text-right">1</td>
-                                <td class="text-right">3.999,00€</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-sm-5">
-                    </div>
-
-                    <div class="col-lg-4 col-sm-5 ml-auto">
-                        <table class="table table-sm table-clear">
-                            <tbody>
-                                <tr>
-                                    <td class="left">
-                                        <strong>Subtotal</strong>
-                                    </td>
-                                    <td class="text-right bg-light">8.497,00€</td>
-                                </tr>
-                                <tr>
-                                    <td class="left">
-                                        <strong>Discount (20%)</strong>
-                                    </td>
-                                    <td class="text-right bg-light">1,699,40€</td>
-                                </tr>
-                                <tr>
-                                    <td class="left">
-                                        <strong>VAT (10%)</strong>
-                                    </td>
-                                    <td class="text-right bg-light">679,76€</td>
-                                </tr>
-                                <tr>
-                                    <td class="left">
-                                        <strong>Total</strong>
-                                    </td>
-                                    <td class="text-right bg-light">
-                                        <strong>7.477,36€</strong>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<br>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
 </body>
 </html>

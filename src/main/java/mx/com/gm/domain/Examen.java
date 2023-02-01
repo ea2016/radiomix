@@ -19,7 +19,6 @@ public class Examen implements Serializable{
     @NotEmpty
     private String nombre;
     
-    @NotEmpty
-    private String precio;
-   
+    private float precio;
+    
 }
