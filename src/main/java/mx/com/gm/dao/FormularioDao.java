@@ -18,4 +18,6 @@ public interface FormularioDao extends JpaRepository<Formulario, Long> {
 	@Query(value = "SELECT f.tipo_pago, f.cedula, p.nombre, p.apellido From radiomix.formulario f inner join radiomix.persona p on p.cedula=f.cedula inner join radiomix.examen examen on examen.id_examen=f.id_examen where p.id_persona= ?1 and f.facturado=true", nativeQuery = true)
 	List<Formulario> findAllByFactura(Long idPersona);
 
+	 List<Formulario> findByidDoctor(String idDoctor);
+
 }
