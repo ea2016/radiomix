@@ -289,7 +289,7 @@ public class ControladorInicio {
 			return "modificarExamen";
 		}
 		examenService.guardar(examen);
-		return "redirect:/indexExamen";
+		return "modificarExamen";
 	}
 
 	@GetMapping("/editarExamen/{idExamen}")
@@ -311,7 +311,7 @@ public class ControladorInicio {
 	public String guardarFormulario(@Valid Formulario formulario, Errors errores, Model model) {
 		formularioService.guardar(formulario);
 		model.addAttribute("formulario", formulario);
-		return "/layout/respuestaFormulario";
+		return "redirect:/";
 	}
 
 	@PostMapping("/guardarObservacion")
@@ -322,7 +322,7 @@ public class ControladorInicio {
 		formObservaciones.setEstatus(Constantes.ASIGNAR_DOCTOR);
 		formularioService.guardar(formObservaciones);
 		model.addAttribute("formulario", formulario);
-		return "/layout/respuestaFormularioTecnico";
+		return "redirect:/";
 	}
 
 	/******************** CARGAR EXAMEN ***************************/
@@ -331,11 +331,13 @@ public class ControladorInicio {
 			@RequestParam("informe") MultipartFile informe, RedirectAttributes attributes) {
 
 		// comprobar si el archivo está vacío
+		
 		if (imagen.isEmpty() || informe.isEmpty()) {
-			attributes.addFlashAttribute("message", "Seleccione un archivo para cargar");
+			attributes.addFlashAttribute("KO",
+					"Se deben cargar el Examen y el informe");
 			return "redirect:/";
 		}
-
+		
 		// normalizar la ruta del archivo
 		String imagenName = StringUtils.cleanPath(imagen.getOriginalFilename());
 
@@ -358,8 +360,8 @@ public class ControladorInicio {
 		}
 
 		// return success response
-		attributes.addFlashAttribute("message",
-				"Examen e informe subido con éxito: " + imagenName + "--" + informeName + "");
+		attributes.addFlashAttribute("OK",
+				"Examen e informe subido con éxito");
 
 		return "redirect:/";
 	}
@@ -411,14 +413,15 @@ public class ControladorInicio {
 
 		descuentoService.guardar(descuento);
 		model.addAttribute("descuento", descuento);
-		return "/layout/respuestaFormularioDescuento";
+		return "redirect:/indexDescuento";
+		//return "/layout/respuestaFormularioDescuento";
 	}
 
 	@GetMapping("/eliminarDescuento{idDescuento}")
 	public String borrarDescuento(@Valid Descuento descuento, Errors errores, Model model) {
 		descuentoService.eliminar(descuento);
 		model.addAttribute("descuento", descuento);
-		return "/layout/respuestaFormularioDescuento";
+		return "redirect:/indexDescuento";
 	}
 
 	@GetMapping("/enviarExamen/{idFormulario}/{idPersona}")
